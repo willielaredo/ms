@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ event.name }}</h1>
+  <p>
+    {{ event.description }}
+  </p>
+  <p>
+    Location: {{ event.location.name }}<br>
+    Start Time: {{ event.start_time|date:"F j, Y, g:i a" }}<br>
+    {% if event.end_time %}
+      End Time: {{ event.end_time|date:"F j, Y, g:i a" }}
+    {% endif %}
+  </p>
+  
+  {% if event.sponsor.count > 0 %}
+    <h2>Sponsors</h2>
+    {% for sponsor in event.sponsor.all %}
+      <p>
+      <a href="{{ sponsor.get_absolute_url }}">{{ sponsor.name }}</a><br>
+      </p>
+    {% endfor %}
+  {% endif %}
+
+
+    {% if event.followers.count > 0 %}
+    <h2>Event Followers</h2>
+    {% for follower in event.followers.all %}
+      <p>
+      {{ follower.username }}<br>
+      </p>
+    {% endfor %}
+  {% endif %}
+  
+
+  {% if user.is_authenticated %}
+      
+      
+      {% if user in event.followers.all %}
+        <p>You are following this event.</p>
+
+        <form method="POST" action="{% url 'unfollow_event' pk=event.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Unfollow</button>
+        </form>
+      {% else %}
+        <form method="POST" action="{% url 'follow_event' pk=event.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Follow</button>
+        </form>
+      {% endif %}
+    
+  {% endif %} 
+
+  {% if perms.cal.can_mark_cancelled %}
+    <p>You can mark this event as cancelled.</p>
+    <!-- We can mark an Event as cancelled. -->
+    <!-- Perhaps add code to link to a "event cancel" view here. -->
+  {% endif %}
+  
+  
+  
+  
+{% endblock %}

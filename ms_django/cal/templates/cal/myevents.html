@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>My Stuff</h1>
+
+    {% if event_list %}
+    <ul>
+
+      {% for event in event_list %}
+      <li>
+        <a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a> ({{ event.start_time }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no events followed by you.</p>
+    {% endif %}
+{% endblock %}

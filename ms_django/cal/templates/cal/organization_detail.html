@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ organization.name }}</h1>
+  <p>
+    {{ organization.description }}
+  </p>
+  <p>
+    Email: {{ organization.email }}<br>
+    Phone: {{ organization.phone }}<br>
+    Website: <a href="{{ organization.website }}">{{ organization.website }}</a><br>
+    Address: {{ organization.address }}
+  </p>
+{% endblock %}
