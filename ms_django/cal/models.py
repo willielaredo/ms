@@ -64,7 +64,7 @@ class Event(models.Model):
     description = models.TextField(help_text='Be sure to include any description already on event imaage.')
     start_time = models.DateTimeField()
     end_time = models.DateTimeField(null=True, blank=True)
-    location_note = models.CharField(max_length=200)
+    location_note = models.CharField(max_length=200,blank=True)
     cancelled = models.BooleanField(default=False)
 
     ### Example of linking the event to a sponsoring organization and a location
