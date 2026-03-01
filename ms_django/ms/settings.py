@@ -39,6 +39,8 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['willielaredo.pythonanywhere.com', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['https://willielaredo.pythonanywhere.com']
+
 
 # Application definition
 
